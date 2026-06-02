@@ -3,7 +3,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 
 const REPO_URL = 'https://github.com/doanhnguyen1311/private-note.git'
-const BRANCH = 'master'
+const BRANCH = 'main'
 const ROOT = path.resolve(__dirname, '..')
 const PACKAGE_JSON = path.join(ROOT, 'package.json')
 
