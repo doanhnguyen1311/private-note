@@ -11,6 +11,7 @@ export function useKeyboardShortcuts(
   const createNote = useNotesStore((state) => state.createNote)
   const duplicateNote = useNotesStore((state) => state.duplicateNote)
   const moveToTrash = useNotesStore((state) => state.moveToTrash)
+  const selectedFolder = useNotesStore((state) => state.selectedFolder)
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -20,7 +21,7 @@ export function useKeyboardShortcuts(
 
       if (event.ctrlKey && event.key.toLowerCase() === 'n') {
         event.preventDefault()
-        void createNote()
+        void createNote({ folder: selectedFolder ?? undefined })
       }
 
       if (event.ctrlKey && event.key.toLowerCase() === 'f') {
@@ -56,5 +57,5 @@ export function useKeyboardShortcuts(
 
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [activeNoteId, createNote, duplicateNote, moveToTrash, openCommandPalette, openGraph, openShortcuts, searchInputId])
+  }, [activeNoteId, createNote, duplicateNote, moveToTrash, openCommandPalette, openGraph, openShortcuts, searchInputId, selectedFolder])
 }

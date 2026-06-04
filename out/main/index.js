@@ -233,7 +233,7 @@ function createNote(input = {}) {
   const timestamp = nowIso();
   const note = {
     id: crypto.randomUUID(),
-    title: input.title?.trim() || "Untitled Note",
+    title: input.title?.trim() ?? "",
     content: input.content ?? "",
     tags: normalizeTags(input.tags),
     folder: normalizeNullableText(input.folder),
@@ -267,7 +267,7 @@ function updateNote(id, updates) {
   const existing = getNoteRequired(id);
   const updated = {
     ...existing,
-    title: updates.title === void 0 ? existing.title : updates.title.trim() || "Untitled Note",
+    title: updates.title === void 0 ? existing.title : updates.title.trim(),
     content: updates.content ?? existing.content,
     tags: updates.tags === void 0 ? existing.tags : normalizeTags(updates.tags),
     folder: updates.folder === void 0 ? existing.folder : normalizeNullableText(updates.folder),

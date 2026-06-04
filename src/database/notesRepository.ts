@@ -289,7 +289,7 @@ export function createNote(input: NoteInput = {}): Note {
   const timestamp = nowIso()
   const note: Note = {
     id: randomUUID(),
-    title: input.title?.trim() || 'Untitled Note',
+    title: input.title?.trim() ?? '',
     content: input.content ?? '',
     tags: normalizeTags(input.tags),
     folder: normalizeNullableText(input.folder),
@@ -328,7 +328,7 @@ export function updateNote(id: string, updates: NoteUpdate): Note {
   const existing = getNoteRequired(id)
   const updated: Note = {
     ...existing,
-    title: updates.title === undefined ? existing.title : updates.title.trim() || 'Untitled Note',
+    title: updates.title === undefined ? existing.title : updates.title.trim(),
     content: updates.content ?? existing.content,
     tags: updates.tags === undefined ? existing.tags : normalizeTags(updates.tags),
     folder: updates.folder === undefined ? existing.folder : normalizeNullableText(updates.folder),

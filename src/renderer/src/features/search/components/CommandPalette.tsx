@@ -19,6 +19,7 @@ export function CommandPalette({ open, activeNote, onClose, onOpenSettings }: Co
   const setSearchQuery = useNotesStore((state) => state.setSearchQuery)
   const loadNotes = useNotesStore((state) => state.loadNotes)
   const refreshOrganization = useNotesStore((state) => state.refreshOrganization)
+  const selectedFolder = useNotesStore((state) => state.selectedFolder)
   const settings = useSettingsStore((state) => state.settings)
   const updateSettings = useSettingsStore((state) => state.updateSettings)
   const showToast = useToastStore((state) => state.showToast)
@@ -29,7 +30,7 @@ export function CommandPalette({ open, activeNote, onClose, onOpenSettings }: Co
         label: 'Create note',
         icon: FilePlus,
         run: async () => {
-          await createNote()
+          await createNote({ folder: selectedFolder ?? undefined })
           showToast('Note created', 'success')
         }
       },
@@ -103,7 +104,7 @@ export function CommandPalette({ open, activeNote, onClose, onOpenSettings }: Co
         }
       }
     ],
-    [activeNote, createNote, loadNotes, onOpenSettings, query, refreshOrganization, setSearchQuery, settings.theme, showToast, updateSettings]
+    [activeNote, createNote, loadNotes, onOpenSettings, query, refreshOrganization, setSearchQuery, settings.theme, showToast, updateSettings, selectedFolder]
   )
 
   const filtered = commands.filter((command) => command.label.toLowerCase().includes(query.toLowerCase()))

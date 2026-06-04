@@ -35,6 +35,7 @@ export function NotesList() {
   const restoreNote = useNotesStore((state) => state.restoreNote)
   const deletePermanent = useNotesStore((state) => state.deletePermanent)
   const updateNote = useNotesStore((state) => state.updateNote)
+  const selectedFolder = useNotesStore((state) => state.selectedFolder)
   const hideRecentContent = useSettingsStore((state) => state.settings.hideRecentContent)
   const showToast = useToastStore((state) => state.showToast)
 
@@ -79,7 +80,7 @@ export function NotesList() {
               <p className="mt-1 text-xs leading-5 text-zinc-300">Create a note, clear filters, or drop files into a folder.</p>
               <button
                 type="button"
-                onClick={() => void createNote()}
+                onClick={() => void createNote({ folder: selectedFolder ?? undefined })}
                 className="mt-4 inline-flex h-9 items-center gap-2 rounded-lg bg-cyan-300 px-3 text-sm font-medium text-black transition hover:bg-cyan-200"
               >
                 <FilePlus size={15} />
